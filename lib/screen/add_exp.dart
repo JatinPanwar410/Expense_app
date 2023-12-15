@@ -1,4 +1,9 @@
+import 'package:expense_app/appstatic.dart';
+import 'package:expense_app/bloc/expense_bloc.dart';
+import 'package:expense_app/models/expense_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class AddExpense extends StatefulWidget {
   const AddExpense({super.key});
@@ -11,9 +16,15 @@ class _AddExpenseState extends State<AddExpense> {
   @override
   Widget build(BuildContext context) {
     var SelectedTransectionType = "Credit";
+    DateTime selectedDate = DateTime.now();
+    var selectedCatIndex = -1;
+    var format = DateFormat.yMMMMd();
+    TextEditingController titleController = TextEditingController();
+    TextEditingController descController = TextEditingController();
+    TextEditingController amtController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
-
         title: Text(
           "Add Expenses",
           style: TextStyle(color: Colors.white),
@@ -96,23 +107,73 @@ class _AddExpenseState extends State<AddExpense> {
                                   crossAxisSpacing: 10),
                           padding: EdgeInsets.symmetric(
                               horizontal: 10, vertical: 10),
+                          itemCount: AppStatic.catagories.length,
                           itemBuilder: (_, index) {
-                            return Container(
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(15),
+                            var eachCat = AppStatic.catagories[index];
+                            return InkWell(
+                              onTap: () {
+                                selectedCatIndex = index;
+                                setState(() {});
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade500,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(21),
+                                  child: Center(
+                                    child: Image.asset(eachCat['img']),
+                                  ),
+                                ),
                               ),
                             );
                           }),
                     );
                   },
+                  child: selectedCatIndex == -1
+                      ? Text(
+                          "Choose Expense",
+                          style: TextStyle(color: Colors.white),
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              AppStatic.catagories[selectedCatIndex]["img"],
+                              width: 20,
+                            ),
+                            Text(
+                                "${AppStatic.catagories[selectedCatIndex]["name"]}")
+                          ],
+                        )),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                  onPressed: () async {
+                    var dateFromPicker = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1999, 1, 01),
+                        lastDate: DateTime.now());
+
+                    selectedDate = dateFromPicker!;
+                    setState(() {});
+                  },
                   child: Text(
-                    "Choose Expense",
+                    format.format(selectedDate),
                     style: TextStyle(color: Colors.white),
                   )),
             ),
             SizedBox(
-              height: 15,
+              height: 5,
             ),
             SizedBox(
               width: double.infinity,
@@ -120,6 +181,19 @@ class _AddExpenseState extends State<AddExpense> {
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.black),
                   onPressed: () {
+                    var title = titleController.toString();
+                    var desc = descController.toString();
+                    var amt = amtController.toString();
+                    var newExpense = ExpenseModel(
+                        desc: desc,
+                        title: title,
+                        amt: double.parse(amt),
+                        balance: 0,
+                        catId: 0,
+                        eType: SelectedTransectionType == "Credit" ? 0 : 1,
+                        timeStamp: selectedDate.microsecondsSinceEpoch.toString());
+
+                    BlocProvider.of<ExpenseBloc>(context).add(AddExpenseEvent(newExpense: newExpense));
                     Navigator.pop(context);
                   },
                   child: Text(

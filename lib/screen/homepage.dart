@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var bal = 0;
-    var data = AppStatic().dummyExpense;
+    // var data = AppStatic().dummyExpense;
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -59,42 +59,7 @@ class HomePage extends StatelessWidget {
                 SizedBox(
                   height: 15,
                 ),
-                Expanded(child: ListView.builder(
-                  itemCount: data.length,
-                    itemBuilder: (_,parentIndex){
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(data[parentIndex]['date'].toString()),
-                              Text(data[parentIndex]['amt'].toString()),
-                            ],
-                          ),
-                          ListView.builder(
-                            shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: (data[parentIndex]['transactions'] as List<Map<String,dynamic>>).length,
-                              itemBuilder: (_,childIndex){
-                                    Map<String,dynamic> eachTransactions = (data[parentIndex]['transactions'] as List<Map<String,dynamic>>)[childIndex];
-                                    return ListTile(
-                                      leading: Image.network(eachTransactions['catImg']),
-                                      title: Text(eachTransactions['title']),
-                                      subtitle: Text(eachTransactions['desc']),
-                                      trailing: Column(
-                                        children: [
-                                          Text(eachTransactions['amt']),
-                                          Text(eachTransactions['balance'])
-                                        ],
-                                      ),
-                                    );
-                              })
-                        ],
-                      ),
-                    );
-                })),
+                Container(),
 
               ],
             ),
@@ -111,3 +76,40 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+// Expanded(child: ListView.builder(
+// itemCount: data.length,
+// itemBuilder: (_,parentIndex){
+// return Padding(
+// padding: const EdgeInsets.all(8.0),
+// child: Column(
+// children: [
+// Row(
+// mainAxisAlignment: MainAxisAlignment.spaceBetween,
+// children: [
+// Text(data[parentIndex]['date'].toString()),
+// Text(data[parentIndex]['amt'].toString()),
+// ],
+// ),
+// ListView.builder(
+// shrinkWrap: true,
+// physics: NeverScrollableScrollPhysics(),
+// itemCount: (data[parentIndex]['transactions'] as List<Map<String,dynamic>>).length,
+// itemBuilder: (_,childIndex){
+// Map<String,dynamic> eachTransactions = (data[parentIndex]['transactions'] as List<Map<String,dynamic>>)[childIndex];
+// return ListTile(
+// leading: Image.network(eachTransactions['catImg']),
+// title: Text(eachTransactions['title']),
+// subtitle: Text(eachTransactions['desc']),
+// trailing: Column(
+// children: [
+// Text(eachTransactions['amt']),
+// Text(eachTransactions['balance'])
+// ],
+// ),
+// );
+// })
+// ],
+// ),
+// );
+// })),

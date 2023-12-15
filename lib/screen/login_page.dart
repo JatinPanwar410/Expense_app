@@ -17,7 +17,7 @@ class LoginPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset("assets/image/FLASH.png",height: 100,),
+                  // Image.asset("assets/image/FLASH.png",height: 100,),
                   SizedBox(
                     width: 8,
                   ),

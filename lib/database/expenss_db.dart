@@ -4,6 +4,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 
+import '../models/expense_model.dart';
+
 class AppDataBase {
   //Singleton
   AppDataBase._();
@@ -16,10 +18,10 @@ class AppDataBase {
   static final String COLUMN_TITLE = "eTitle";
   static final String COLUMN_DESC = "eDesc";
   static final String COLUMN_TYPE = "eType"; //0 for debit and 1 for credit
-  static final String COLUMN_EXPENSE_CAT_ID = "cId";
+  static final String COLUMN_EXPENSE_CAT_ID = "catId";
   static final String COLUMN_AMT = "amt";
   static final String COLUMN_BALANCE = "balance";
-  static final String COLUMN_TIMESTAMP = "time";
+  static final String COLUMN_TIMESTAMP = "timeStamp";
 
 
   //category
@@ -42,7 +44,7 @@ class AppDataBase {
   Future<Database> initDB() async {
     var mDirectory = await getApplicationDocumentsDirectory();
 
-    var dbPath = join(mDirectory.path, "expensoDB");
+    var dbPath = join(mDirectory.path, "expenseDB");
 
     return openDatabase(dbPath, version: 1, onCreate: (db, _) {
       //create your tables here..
@@ -63,28 +65,28 @@ class AppDataBase {
   }
 
 
-  // Future<bool> addExpense(ExpenseModel newExpense) async{
-  //
-  //   var db = await getDB();
-  //
-  //   var rowsEffected = await db.insert(TABLE_NAME, newExpense.toMap());
-  //
-  //   return rowsEffected>0;
-  // }
-  //
-  // Future<List<ExpenseModel>> getAllExpenses() async{
-  //   var db = await getDB();
-  //
-  //   var data = await db.query(TABLE_NAME);
-  //
-  //   List<ExpenseModel> arrExpenses = [];
-  //
-  //   for(Map<String, dynamic> eachMap in data){
-  //     arrExpenses.add(ExpenseModel.fromMap(eachMap));
-  //   }
-  //
-  //   return arrExpenses;
-  // }
+  Future<bool> addExpense(ExpenseModel newExpense) async{
+
+    var db = await getDB();
+
+    var rowsEffected = await db.insert(TABLE_NAME, newExpense.toMap());
+
+    return rowsEffected>0;
+  }
+
+  Future<List<ExpenseModel>> getAllExpenses() async{
+    var db = await getDB();
+
+    var data = await db.query(TABLE_NAME);
+
+    List<ExpenseModel> arrExpenses = [];
+
+    for(Map<String, dynamic> eachMap in data){
+      arrExpenses.add(ExpenseModel.fromMap(eachMap));
+    }
+
+    return arrExpenses;
+  }
 
 
 
