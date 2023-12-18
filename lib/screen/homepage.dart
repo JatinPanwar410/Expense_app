@@ -1,11 +1,24 @@
-import 'package:expense_app/appstatic.dart';
+import 'package:expense_app/bloc/expense_bloc.dart';
 import 'package:expense_app/screen/add_exp.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<ExpenseBloc>(context).add(FetchAllExpenseEvent());
+  }
   @override
   Widget build(BuildContext context) {
     var bal = 0;
@@ -59,7 +72,9 @@ class HomePage extends StatelessWidget {
                 SizedBox(
                   height: 15,
                 ),
-                Container(),
+                BlocBuilder<ExpenseBloc,ExpenseState>(builder: (ctx,state){
+                  return Container();
+                })
 
               ],
             ),

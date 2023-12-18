@@ -27,20 +27,19 @@ class ExpenseModel {
         title: map[AppDataBase.COLUMN_TITLE],
         amt: map[AppDataBase.COLUMN_AMT],
         balance: map[AppDataBase.COLUMN_BALANCE],
-        catId: map[AppDataBase.COLUMN_CAT_ID],
+        catId: map[AppDataBase.COLUMN_EXPENSE_CAT_ID],
         eType: map[AppDataBase.COLUMN_TYPE],
         timeStamp: map[AppDataBase.COLUMN_TIMESTAMP]);
   }
 
   Map<String,dynamic> toMap(){
     return{
-      AppDataBase.COLUMN_ID : eId,
-      AppDataBase.COLUMN_CAT_ID : catId,
-      AppDataBase.COLUMN_TYPE : eType,
       AppDataBase.COLUMN_TITLE : title,
       AppDataBase.COLUMN_DESC : desc,
-      AppDataBase.COLUMN_AMT : amt,
+      AppDataBase.COLUMN_TYPE : eType,
+      AppDataBase.COLUMN_EXPENSE_CAT_ID : catId,
       AppDataBase.COLUMN_TIMESTAMP : timeStamp,
+      AppDataBase.COLUMN_AMT : amt,
       AppDataBase.COLUMN_BALANCE : balance,
     };
   }
