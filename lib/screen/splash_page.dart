@@ -17,9 +17,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 3),
+    Timer(const Duration(seconds: 3),
           () {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
       },);
   }
   @override
@@ -29,12 +29,12 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SizedBox(height: 310,),
+            const SizedBox(height: 310,),
             Text("Spendo",style: GoogleFonts.montserrat(
                 fontWeight: FontWeight.bold,
                 fontSize: 45,
             ),),
-            SizedBox(height: 25,),
+            const SizedBox(height: 25,),
             Container(
               height: 493,
               width: double.infinity,

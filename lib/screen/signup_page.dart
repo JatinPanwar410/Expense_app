@@ -17,17 +17,17 @@ class SignupPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset("assets/image/FLASH.png",height: 100,),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
-                  Text("spendo",style: TextStyle(fontSize: 80),),
+                  const Text("spendo",style: TextStyle(fontSize: 80),),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text("Expenses made easy", style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
-              SizedBox(height: 80,),
+              const Text("Expenses made easy", style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
+              const SizedBox(height: 80,),
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 25,
@@ -38,11 +38,11 @@ class SignupPage extends StatelessWidget {
                       hintText: "Email",
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.grey)
+                          borderSide: const BorderSide(color: Colors.grey)
                       ),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.grey)
+                          borderSide: const BorderSide(color: Colors.grey)
                       )
                   ),
                 ),
@@ -58,11 +58,11 @@ class SignupPage extends StatelessWidget {
                       hintText: "Password",
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.grey)
+                          borderSide: const BorderSide(color: Colors.grey)
                       ),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.grey)
+                          borderSide: const BorderSide(color: Colors.grey)
                       )
                   ),
                 ),
@@ -78,19 +78,19 @@ class SignupPage extends StatelessWidget {
                       hintText: "Conform Password",
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.grey)
+                          borderSide: const BorderSide(color: Colors.grey)
                       ),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.grey)
+                          borderSide: const BorderSide(color: Colors.grey)
                       )
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 35,
               ),
-              Container(
+              SizedBox(
                 width: 350,
                 height: 60,
                 child: ElevatedButton(
@@ -101,8 +101,8 @@ class SignupPage extends StatelessWidget {
                         )
                     ),
                     onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),));
-                    }, child: Text("SIGN IN",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),)),
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage(),));
+                    }, child: const Text("SIGN IN",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),)),
               ),
             ],
           ),

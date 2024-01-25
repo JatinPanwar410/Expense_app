@@ -6,14 +6,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class AddExpense extends StatefulWidget {
-  const AddExpense({super.key});
+  double mBalance;
+  AddExpense({super.key, required this.mBalance});
 
   @override
   State<AddExpense> createState() => _AddExpenseState();
 }
 
 class _AddExpenseState extends State<AddExpense> {
-  String selectedTransactionType = 'Credit';
+  String selectedTransactionType = 'Debit';
   DateTime selectedDate = DateTime.now();
   var selectedCatIndex = -1;
   var format = DateFormat.yMMMMd();
@@ -24,7 +25,8 @@ class _AddExpenseState extends State<AddExpense> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        automaticallyImplyLeading: false,
+        title: const Text(
           "Add Expenses",
           style: TextStyle(color: Colors.white),
         ),
@@ -41,13 +43,13 @@ class _AddExpenseState extends State<AddExpense> {
                 decoration: InputDecoration(
                     hintText: "Name your Expense",
                     enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
+                        borderSide: const BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.circular(15)),
                     focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
+                        borderSide: const BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.circular(15))),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               TextField(
@@ -55,13 +57,13 @@ class _AddExpenseState extends State<AddExpense> {
                 decoration: InputDecoration(
                     hintText: "Add Desc",
                     enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
+                        borderSide: const BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.circular(15)),
                     focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
+                        borderSide: const BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.circular(15))),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               TextField(
@@ -69,13 +71,13 @@ class _AddExpenseState extends State<AddExpense> {
                 decoration: InputDecoration(
                     hintText: "Enter Amount",
                     enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
+                        borderSide: const BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.circular(15)),
                     focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
+                        borderSide: const BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.circular(15))),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               DropdownButton(
@@ -87,11 +89,11 @@ class _AddExpenseState extends State<AddExpense> {
                       });
                     }
                   },
-                  items: ['Credit', 'Debit']
+                  items: ['Debit', 'Credit']
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem(value: value, child: Text(value));
                   }).toList()),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               SizedBox(
@@ -104,11 +106,11 @@ class _AddExpenseState extends State<AddExpense> {
                         context: context,
                         builder: (context) => GridView.builder(
                             gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
+                                const SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 4,
                                     mainAxisSpacing: 10,
                                     crossAxisSpacing: 10),
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 10),
                             itemCount: AppStatic.catagories.length,
                             itemBuilder: (_, index) {
@@ -127,9 +129,9 @@ class _AddExpenseState extends State<AddExpense> {
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.all(21),
+                                    padding: const EdgeInsets.all(21),
                                     child: Center(
-                                      child: Image.asset(eachCat['img']),
+                                      child: Image.asset(eachCat["image"]),
                                     ),
                                   ),
                                 ),
@@ -137,17 +139,17 @@ class _AddExpenseState extends State<AddExpense> {
                             }),
                       );
                     },
-                  child: selectedCatIndex == -1 ? Text("Choose Expense",style: TextStyle(color: Colors.white),) : Row(
+                  child: selectedCatIndex == -1 ? const Text("Choose Expense",style: TextStyle(color: Colors.white),) : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        AppStatic.catagories[selectedCatIndex]["img"], width: 20,
+                        AppStatic.catagories[selectedCatIndex]["image"], width: 20,
                         height: 20,),
-                      Text(" - ${AppStatic.catagories[selectedCatIndex]["name"]}",style: TextStyle(color: Colors.white),)
+                      Text(" - ${AppStatic.catagories[selectedCatIndex]["name"]}",style: const TextStyle(color: Colors.white),)
                     ],
                   ),),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               SizedBox(
@@ -167,10 +169,10 @@ class _AddExpenseState extends State<AddExpense> {
                     },
                     child: Text(
                       format.format(selectedDate),
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     )),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               SizedBox(
@@ -182,19 +184,27 @@ class _AddExpenseState extends State<AddExpense> {
                       var title = titleController.text.toString();
                       var desc = descController.text.toString();
                       var amt = amtController.text.toString();
+
+                      var balance = widget.mBalance;
+                      if(selectedTransactionType=="Credit"){
+                        balance += double.parse(amt);
+                      } else {
+                        balance -= double.parse(amt);
+                      }
+
                       var newExpense = ExpenseModel(
                           desc: desc,
                           title: title,
                           amt: double.parse(amt),
-                          balance: 0,
-                          catId: 0,
+                          balance: balance,
+                          catId: selectedCatIndex,
                           eType: selectedTransactionType == "Credit" ? 0 : 1,
                           timeStamp: selectedDate.millisecondsSinceEpoch.toString());
 
                       BlocProvider.of<ExpenseBloc>(context).add(AddExpenseEvent(newExpense: newExpense));
                       Navigator.pop(context);
                     },
-                    child: Text(
+                    child: const Text(
                       "Add Expense",
                       style: TextStyle(color: Colors.white),
                     )),

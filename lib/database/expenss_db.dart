@@ -2,7 +2,6 @@
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:sqflite/sqlite_api.dart';
 
 import '../models/expense_model.dart';
 
@@ -13,22 +12,22 @@ class AppDataBase {
   static final AppDataBase db = AppDataBase._();
 
   //expense
-  static final String TABLE_NAME = "expense";
-  static final String COLUMN_ID = "eId";
-  static final String COLUMN_TITLE = "eTitle";
-  static final String COLUMN_DESC = "eDesc";
-  static final String COLUMN_TYPE = "eType"; //0 for debit and 1 for credit
-  static final String COLUMN_EXPENSE_CAT_ID = "catId";
-  static final String COLUMN_AMT = "amt";
-  static final String COLUMN_BALANCE = "balance";
-  static final String COLUMN_TIMESTAMP = "timeStamp";
+  static const String TABLE_NAME = "expense";
+  static const String COLUMN_ID = "eId";
+  static const String COLUMN_TITLE = "eTitle";
+  static const String COLUMN_DESC = "eDesc";
+  static const String COLUMN_TYPE = "eType"; //0 for debit and 1 for credit
+  static const String COLUMN_EXPENSE_CAT_ID = "catId";
+  static const String COLUMN_AMT = "amt";
+  static const String COLUMN_BALANCE = "balance";
+  static const String COLUMN_TIMESTAMP = "timeStamp";
 
 
   //category
-  static final String TABLE_CAT_NAME = "category";
-  static final String COLUMN_CAT_ID = "cId";
-  static final String COLUMN_CAT_TITLE = "cTitle";
-  static final String COLUMN_CAT_IMG_PATH = "cPath";
+  static const String TABLE_CAT_NAME = "category";
+  static const String COLUMN_CAT_ID = "cId";
+  static const String COLUMN_CAT_TITLE = "cTitle";
+  static const String COLUMN_CAT_IMG_PATH = "cPath";
 
   Database? myDB;
 
@@ -77,7 +76,7 @@ class AppDataBase {
   Future<List<ExpenseModel>> getAllExpenses() async{
     var db = await getDB();
 
-    var data = await db.query(TABLE_NAME);
+    var data = await db.query(TABLE_NAME, orderBy: "$COLUMN_TIMESTAMP DESC");
 
     List<ExpenseModel> arrExpenses = [];
 

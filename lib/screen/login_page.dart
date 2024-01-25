@@ -14,7 +14,7 @@ class LoginPage extends StatelessWidget {
           padding: const EdgeInsets.only(top: 150),
           child: Column(
             children: [
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Image.asset("assets/image/FLASH.png",height: 100,),
@@ -24,11 +24,11 @@ class LoginPage extends StatelessWidget {
                   Text("spendo",style: TextStyle(fontSize: 80),),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text("Expenses made easy", style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
-              SizedBox(height: 80,),
+              const Text("Expenses made easy", style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
+              const SizedBox(height: 80,),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 25,
@@ -39,11 +39,11 @@ class LoginPage extends StatelessWidget {
                     hintText: "Email",
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.grey)
+                      borderSide: const BorderSide(color: Colors.grey)
                     ),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.grey)
+                          borderSide: const BorderSide(color: Colors.grey)
                       )
                   ),
                 ),
@@ -59,19 +59,19 @@ class LoginPage extends StatelessWidget {
                       hintText: "Password",
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.grey)
+                          borderSide: const BorderSide(color: Colors.grey)
                       ),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.grey)
+                          borderSide: const BorderSide(color: Colors.grey)
                       )
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 35,
               ),
-              Container(
+              SizedBox(
                 width: 350,
                 height: 60,
                 child: ElevatedButton(
@@ -82,24 +82,24 @@ class LoginPage extends StatelessWidget {
                       )
                     ),
                     onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),));
-                    }, child: Text("LOGIN",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),)),
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage(),));
+                    }, child: const Text("LOGIN",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),)),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               TextButton(
-                  onPressed: (){}, child: Text("Forgot password?",style: TextStyle(color: Colors.grey),)),
-              SizedBox(
+                  onPressed: (){}, child: const Text("Forgot password?",style: TextStyle(color: Colors.grey),)),
+              const SizedBox(
                 height: 80,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an account?"),
+                  const Text("Don't have an account?"),
                   TextButton(onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SignupPage(),));
-                  }, child: Text("SignUp",style: TextStyle(color: Colors.grey),))
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const SignupPage(),));
+                  }, child: const Text("SignUp",style: TextStyle(color: Colors.grey),))
                 ],
               )
             ],

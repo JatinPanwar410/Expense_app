@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
-
 
 class AppStatic {
-
   static const String BasePath = "assets/icon/cat/";
 
   static const String coffeePath = "${BasePath}coffee.png";
@@ -13,21 +10,20 @@ class AppStatic {
   static const String travelPath = "${BasePath}travel.png";
   static const String vegetablesPath = "${BasePath}vegetables.png";
   static const String smartphonePath = "${BasePath}smartphone.png";
+  static const String vehiclesPath = "${BasePath}vehicles.png";
 
-
-
-  static const List<Map<String,dynamic>> catagories = [
-    {'id': 1, 'name': 'Travel', 'img': coffeePath},
-    {'id': 2, 'name': 'Coffee', 'img': fastFoodPath},
-    {'id': 3, 'name': 'Movie', 'img': restaurantPath},
-    {'id': 4, 'name': 'Petrol', 'img': shoppingPath},
-    {'id': 5, 'name': 'Recharge', 'img': snackPath},
-    {'id': 6, 'name': 'Shopping', 'img': travelPath},
-    {'id': 7, 'name': 'Snacks', 'img': vegetablesPath},
-    {'id': 8, 'name': 'Restaurant', 'img': smartphonePath},
+  static const List<Map<String, dynamic>> catagories = [
+    {'id': 1, 'name': 'Coffee', 'image': coffeePath},
+    {'id': 2, 'name': 'FastFood', 'image': fastFoodPath},
+    {'id': 3, 'name': 'Restaurant', 'image': restaurantPath},
+    {'id': 4, 'name': 'Shopping', 'image': shoppingPath},
+    {'id': 5, 'name': 'Snack', 'image': snackPath},
+    {'id': 6, 'name': 'Travel', 'image': travelPath},
+    {'id': 7, 'name': 'Vegetables', 'image': vegetablesPath},
+    {'id': 8, 'name': 'Recharge', 'image': smartphonePath},
+    {'id': 9, 'name': 'Petrol', 'image': vehiclesPath},
   ];
 }
-
 
 // List<Map<String,dynamic>> dummyExpense = [
 //   {
